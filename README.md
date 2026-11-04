@@ -13,6 +13,8 @@ proposed change and whether it was kept, and the held-out test scores.
 forward-pass prompt (computing a neuron's output) and the update prompt (choosing new
 weights), with `{placeholders}` for the values filled in on every call.
 
+`plots/` holds each run's loss curve and six comparison plots (see [Plots](#plots)).
+
 ## Run index
 
 Every run starts from the same weights (seed 0). All results are **single runs**.
@@ -59,6 +61,24 @@ Notes:
   stopped; that output appears in the log, so the final results section can differ
   slightly from the step-20 numbers above.
 - In run 12 the reasoning text is a summary returned by the API, not the raw chain of thought.
+
+## Plots
+
+Comparison plots (hill-climbing curves are the median and middle half of 200 runs from
+the same start; Adam and gradient descent also start from the same weights):
+
+| Plot | What it shows |
+| --- | --- |
+| `compare_xor.png` | XOR: LLM neurons (run 06) vs hill climbing, Adam and gradient descent |
+| `compare_parity3.png` | 3-bit parity: runs 07 and 08 vs the baselines over 40 steps |
+| `compare_moons.png` | Moons: run 09 vs the baselines (training loss) |
+| `compare_moons_big_update_models.png` | Larger moons task: Haiku, Nemotron 3 Ultra and GPT-6 Astra as update models vs the baselines |
+| `xor_method_evolution.png` | Final XOR loss for each version of the method (runs 01–06) |
+| `moons_big_matched_generalisation.png` | Test loss against training loss for 12,000 hill-climbing network states, with the Nemotron and Astra runs marked |
+
+`plots/runNN_*_loss.png` is the loss curve each run plotted for itself.
+
+![Update models on the larger moons task](plots/compare_moons_big_update_models.png)
 
 ## Prompts
 
